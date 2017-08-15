@@ -14,19 +14,26 @@ public class Question {
     @Column(name = "QUESTION")
     private String questionText;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
-    private String type;
+    private AnswerType type;
+
+    @OneToMany(mappedBy = "questionID")
+    private List<QuestionValue> questionValues;
 
     public Question() {
     }
 
-    public Question(String questionText, String type) {
+    public Question(String questionText, AnswerType type) {
         this.questionText = questionText;
         this.type = type;
     }
 
-    @OneToMany(mappedBy = "questionId")
-    List<Answer> answer = new ArrayList<Answer>();
+    public Question(String questionText, AnswerType type, List<QuestionValue> questionValues) {
+        this.questionText  = questionText;
+        this.type = type;
+        this.questionValues = questionValues;
+    }
 
     public int getId() {
         return id;
@@ -36,24 +43,11 @@ public class Question {
         return questionText;
     }
 
-    public void setQuestionText(String questionText) {
-        this.questionText = questionText;
-    }
-
-    public String getType() {
+    public AnswerType getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public List<QuestionValue> getQuestionValues() {
+        return questionValues;
     }
-
-    public List<Answer> getAnswers() {
-        return answer;
-    }
-
-    public void setAnswers(List<Answer> answer) {
-        this.answer = answer;
-    }
-
 }
