@@ -35,4 +35,12 @@ public class QuestionDTO {
     public void setDtos(List<QuestionValueDTO> dtos) {
         this.dtos = dtos;
     }
+
+    public List<String> getQuestionValues() {
+        List<String> questionValues = new ArrayList<>();
+        for (QuestionValueDTO questionValueDTO : dtos) {
+            questionValues.add(questionValueDTO.getText());
+        }
+        return questionValues;
+    }
 }

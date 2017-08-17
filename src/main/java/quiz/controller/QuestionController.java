@@ -29,10 +29,12 @@ public class QuestionController {
     @PostMapping(value = "/save-question")
     public String saveQuestion(@RequestBody QuestionDTO questionDTO, HttpServletRequest request){
 
-        questionService.createQuestion(questionDTO.getText(), questionDTO.getType(), questionDTO.getDtos()
-        .stream()
-        .map(value -> value.getText())
-        .collect(toList()));
+        questionService.createQuestion(questionDTO.getText(), questionDTO.getType(), questionDTO.getQuestionValues());
+
+//        questionService.createQuestion(questionDTO.getText(), questionDTO.getType(), questionDTO.getDtos()
+//        .stream()
+//        .map(value -> value.getText())
+//        .collect(toList()));
 
         request.setAttribute("questions", questionService.getAllQuestions());
         request.setAttribute("mode", "MODE_QUESTIONS");

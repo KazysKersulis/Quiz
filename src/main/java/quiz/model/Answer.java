@@ -1,49 +1,65 @@
 package quiz.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.sun.javafx.beans.IDProperty;
 
-@Entity
-@Table(name = "ANSWER")
+import javax.persistence.*;
+
+@Table
+@Entity(name = "ANSWERS")
 public class Answer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "ANSWER")
-    public String answerText;
+    @Column(name = "QUESTION")
+    private String question;
 
-    @Column(name = "QUESTION_TYPE")
-    private int questionId;
+    @Column(name = "ANSWER")
+    private String answer;
+
+    @Column(name = "SUBMISSION_ID")
+    private Integer submissionId;
 
     public Answer() {
     }
 
-    public Answer(String answerText, int questionId) {
-        this.answerText = answerText;
-        this.questionId = questionId;
+    public Answer(String question, String answer, Integer submissionId) {
+        this.question = question;
+        this.answer = answer;
+        this.submissionId = submissionId;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getAnswerText() {
-        return answerText;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setAnswerText(String answerText) {
-        this.answerText = answerText;
+    public String getQuestion() {
+        return question;
     }
 
-    public int getAnswerTypeId() {
-        return questionId;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public void setType(int typeId) {
-        this.questionId = typeId;
+    public String getAnswer() {
+        return answer;
     }
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public Integer getSubmissionId() {
+        return submissionId;
+    }
+
+    public void setSubmissionId(Integer submissionId) {
+        this.submissionId = submissionId;
+    }
 }
+

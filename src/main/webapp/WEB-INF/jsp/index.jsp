@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -24,7 +25,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="new-question">Add new Question</a></li>
-                <li><a href="all-questions">All questions</a></li>
+                <li><a href="quiz">All questions</a></li>
             </ul>
         </div>
     </div>
@@ -39,31 +40,63 @@
         </div>
     </c:when>
 
+    <c:when test="${mode == 'MODE_SUCCESS'}">
+        Successfully submitted quiz
+    </c:when>
+
     <c:when test="${mode == 'MODE_QESTIONS'}">
         <div class="container text-center" id="questionsDiv">
             <h3>Quiz</h3>
             <hr>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered text-left">
-                    <thead>
-                    <tr>
-                            <th>Id</th>
-                        <th>Question</th>
-                        <th>Answer</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="question" items="${questions}">
+                <form:form modelAttribute="submissionDTO" method="POST" action="/quiz">
+                    Vardas <input type="text" name="firstName">
+                    Pavarde <input type="text" name="lastName">
+                    <table class="table table-striped table-bordered text-left">
+                        <thead>
                         <tr>
-                                <%--<td>${relative.id}</td>--%>
-                            <td>${question.question}</td>
-                            <td>${question.type}</td>
-                            <%--<td><a href="delete-question?id=${question.id}"><span class="glyphicon glyphicon-trash" /></a>--%>
-                            <%--</td>--%>
+                            <th>Id</th>
+                            <th>Question</th>
+                            <th>Answer</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="element" items="${elements}">
+                            <tr>
+                                <td>${element.question.id}</td>
+                                <td>${element.question.questionText}</td>
+                                <td>
+                                    <c:if test="${element.question.type=='RADIO'}">
+
+                                        <c:forEach var="answer" items="${element.answers}">
+                                            <input type="radio" name="answer" value="${answer}">
+                                            <form:label path="answer">${answer}</form:label>
+                                        </c:forEach>
+
+                                    </c:if>
+                                    <c:if test="${element.question.type=='SELECT'}">
+                                        <select name="item">
+                                            <c:forEach var="answer" items="${element.answers}">
+                                                <option value="1">${answer}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </c:if>
+                                    <c:if test="${element.question.type=='CHECK'}">
+                                        <c:forEach var="answer" items="${element.answers}">
+                                            <input type="checkbox" name="id"> ${answer} <BR>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="${element.question.type=='INPUT'}">
+                                        <input type="text" name="name">
+                                    </c:if>
+
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </form:form>
             </div>
         </div>
     </c:when>

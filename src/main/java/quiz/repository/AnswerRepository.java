@@ -1,8 +1,7 @@
 package quiz.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import quiz.model.Answer;
 
-public interface AnswerRepository extends CrudRepository<Answer, Integer> {
-
+public interface AnswerRepository extends JpaRepository<Answer, Integer> {
 }
