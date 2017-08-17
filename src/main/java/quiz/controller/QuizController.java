@@ -55,33 +55,33 @@ public class QuizController {
         return "index";
     }
 
-//    @PostMapping(value = "/quiz")
-//    public String doQuiz(@RequestBody SubmissionDTO submissionDTO, HttpServletRequest request){
-//
-//        quizService.submitQuiz(submissionDTO, submissionDTO.getAnswerValues());
-//
-//        request.setAttribute("mode", "MODE_QUESTIONS");
-//
-//        return "index";
-//    }
-
-
     @PostMapping(value = "/quiz")
-    public String doQuiz(@ModelAttribute("submissionDTO")SubmissionDTO submissionDTO,
-                         BindingResult result, ModelMap model) {
+    public String doQuiz(@RequestBody SubmissionDTO submissionDTO, HttpServletRequest request){
 
-        model.addAttribute("firstName", submissionDTO.getFirstName());
-        model.addAttribute("lastName", submissionDTO.getLastName());
-        model.addAttribute("answers", submissionDTO.getAnswerValues());
+        quizService.submitQuiz(submissionDTO, submissionDTO.getAnswerValues());
 
-//        quizService.submitQuiz(submissionDTO);
-
-//        quizService.submitQuiz(submissionDTO, submissionDTO.getAnswerValues());
-
-        model.addAttribute("mode", "MODE_SUCCESS");
+        request.setAttribute("mode", "MODE_QUESTIONS");
 
         return "index";
     }
+
+
+//    @PostMapping(value = "/quiz")
+//    public String doQuiz(@ModelAttribute("submissionDTO")SubmissionDTO submissionDTO,
+//                         BindingResult result, ModelMap model) {
+//
+//        model.addAttribute("firstName", submissionDTO.getFirstName());
+//        model.addAttribute("lastName", submissionDTO.getLastName());
+//        model.addAttribute("answers", submissionDTO.getAnswerValues());
+//
+//        quizService.submitQuiz(submissionDTO);
+//
+//        quizService.submitQuiz(submissionDTO, submissionDTO.getAnswerValues());
+//
+//        model.addAttribute("mode", "MODE_SUCCESS");
+//
+//        return "index";
+//    }
 
 
 }

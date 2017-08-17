@@ -23,8 +23,7 @@ public class AnswerValueService {
 
         for (String answerValue : answerValues) {
 
-            // String question, String answer, Integer submissionId
-            Answer newAnswer = new Answer("asd", answerValue, submission_id);
+            Answer newAnswer = new Answer(answerValue, submission_id);
 
             answerRepository.save(newAnswer);
         }

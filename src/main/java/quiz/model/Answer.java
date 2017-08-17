@@ -12,9 +12,6 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "QUESTION")
-    private String question;
-
     @Column(name = "ANSWER")
     private String answer;
 
@@ -24,8 +21,7 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(String question, String answer, Integer submissionId) {
-        this.question = question;
+    public Answer(String answer, Integer submissionId) {
         this.answer = answer;
         this.submissionId = submissionId;
     }
@@ -36,14 +32,6 @@ public class Answer {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public String getAnswer() {
