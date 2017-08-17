@@ -9,13 +9,13 @@ public class Submission {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Integer submission_Id;
+    private Integer submissionId;
 
     @Column(name = "FIRST_NAME")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "LAST_NAME")
-    private String last_name;
+    private String lastName;
 
     @OneToMany(mappedBy = "submissionId")
     private List<Answer> answerValues;
@@ -23,41 +23,46 @@ public class Submission {
     public Submission() {
     }
 
-    public Submission(String first_name, String last_name) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Submission(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public Integer getSubmission_Id() {
-        return submission_Id;
+    public Submission(String firstName, String lastName, List<Answer> answerValues) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.answerValues = answerValues;
     }
 
-    public void setSubmission_Id(Integer submission_Id) {
-        this.submission_Id = submission_Id;
+    public Integer getSubmissionId() {
+        return submissionId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public void setSubmissionId(Integer submissionId) {
+        this.submissionId = submissionId;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    @Override
-    public String toString() {
-        return "Submission{" +
-                "submission_Id=" + submission_Id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                '}';
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public List<Answer> getAnswerValues() {
+        return answerValues;
+    }
+
+    public void setAnswerValues(List<Answer> answerValues) {
+        this.answerValues = answerValues;
     }
 }

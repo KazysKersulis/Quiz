@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import quiz.controller.dto.SubmissionDTO;
 import quiz.model.Submission;
-import quiz.repository.AnswerRepository;
 import quiz.repository.SubmissionRepository;
 
 import java.util.List;
@@ -14,12 +13,12 @@ import java.util.List;
 public class QuizService {
 
     private SubmissionRepository submissionRepository;
-    private AnswerValueService answerValueService;
+    private AnswerService answerService;
 
     @Autowired
-    public QuizService(SubmissionRepository submissionRepository, AnswerValueService answerValueService) {
+    public QuizService(SubmissionRepository submissionRepository, AnswerService answerService) {
         this.submissionRepository = submissionRepository;
-        this.answerValueService = answerValueService;
+        this.answerService = answerService;
     }
 
     @Transactional
@@ -29,7 +28,7 @@ public class QuizService {
 
         submissionRepository.saveAndFlush(newSubmission);
 
-        answerValueService.createAnswerValue(answerValues, newSubmission.getSubmission_Id());
+        answerService.createAnswerValue(answerValues, newSubmission.getSubmissionId());
 
     }
 

@@ -52,6 +52,7 @@
                 <form:form modelAttribute="submissionDTO" method="POST" action="/quiz">
                     Vardas <input type="text" name="firstName">
                     Pavarde <input type="text" name="lastName">
+                    <hr>
                     <table class="table table-striped table-bordered text-left">
                         <thead>
                         <tr>

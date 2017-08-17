@@ -10,12 +10,12 @@ import quiz.repository.AnswerRepository;
 import java.util.List;
 
 @Service
-public class AnswerValueService {
+public class AnswerService {
 
     private AnswerRepository answerRepository;
 
     @Autowired
-    public AnswerValueService(AnswerRepository answerRepository) {
+    public AnswerService(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
     }
 
