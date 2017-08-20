@@ -40,4 +40,8 @@ public class QuestionValue {
     public int getQuestionID() {
         return questionID;
     }
+
+    public boolean isTextNull() {
+        return (text.isEmpty());
+    }
 }

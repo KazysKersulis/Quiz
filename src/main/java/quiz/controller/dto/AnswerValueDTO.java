@@ -4,23 +4,23 @@ import quiz.model.AnswerType;
 
 public class AnswerValueDTO {
 
-    private AnswerType type;
+//    private AnswerType type;
 
     private String text;
 
     public AnswerValueDTO() {
     }
 
-    public AnswerValueDTO(String text, AnswerType type) {
+    public AnswerValueDTO(String text) {
         this.text = text;
-        this.type = type;
+//        this.type = type;
     }
 
     public String getText() {
         return text;
     }
 
-    public AnswerType getType() {
-        return type;
-    }
+//    public AnswerType getType() {
+//        return type;
+//    }
 }

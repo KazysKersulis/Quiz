@@ -15,8 +15,6 @@ public class SubmissionDTO {
     @NotEmpty
     private String lastName;
 
-    private String answer;
-
     private List<AnswerValueDTO> dtos;
 
     public SubmissionDTO() {
@@ -34,14 +32,6 @@ public class SubmissionDTO {
             answerValues.add(answerValueDTO.getText());
         }
         return answerValues;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
     }
 
     public String getFirstName() {

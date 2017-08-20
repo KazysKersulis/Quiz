@@ -2,9 +2,11 @@ package quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import quiz.controller.dto.QuestionDTO;
+import quiz.controller.dto.QuestionValueDTO;
 import quiz.model.Question;
 import quiz.service.QuestionService;
 
@@ -21,23 +23,20 @@ public class QuestionController {
     public QuestionService questionService;
 
     @GetMapping("/new-question")
-    public String newQuestion(HttpServletRequest request){
-        request.setAttribute("mode", "MODE_NEW");
+    public String newQuestion(ModelMap model){
+        model.addAttribute("questionDTO", new QuestionDTO());
+        model.addAttribute("mode", "MODE_NEW");
+
         return "index";
     }
 
     @PostMapping(value = "/save-question")
-    public String saveQuestion(@RequestBody QuestionDTO questionDTO, HttpServletRequest request){
+    public String saveQuestion(@ModelAttribute("questionDTO") QuestionDTO questionDTO, BindingResult result, ModelMap model){
 
-        questionService.createQuestion(questionDTO.getText(), questionDTO.getType(), questionDTO.getQuestionValues());
+        questionService.createQuestion(questionDTO, questionDTO.getQuestionValues());
 
-//        questionService.createQuestion(questionDTO.getText(), questionDTO.getType(), questionDTO.getDtos()
-//        .stream()
-//        .map(value -> value.getText())
-//        .collect(toList()));
-
-        request.setAttribute("questions", questionService.getAllQuestions());
-        request.setAttribute("mode", "MODE_QUESTIONS");
+        model.addAttribute("questions", questionService.getAllQuestions());
+        model.addAttribute("mode", "MODE_NEW_QUESTION_SUCCESS");
         return "index";
     }
 

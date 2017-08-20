@@ -41,7 +41,11 @@
     </c:when>
 
     <c:when test="${mode == 'MODE_SUCCESS'}">
-        Successfully submitted quiz
+        Successfully submitted quiz!
+    </c:when>
+
+    <c:when test="${mode == 'MODE_NEW_QUESTION_SUCCESS'}">
+        Successfully submitted new question!
     </c:when>
 
     <c:when test="${mode == 'MODE_QESTIONS'}">
@@ -50,13 +54,16 @@
             <hr>
             <div class="table-responsive">
                 <form:form modelAttribute="submissionDTO" method="POST" action="/quiz">
-                    Vardas <input type="text" name="firstName">
-                    Pavarde <input type="text" name="lastName">
+
+                    Vardas<input path="submissionDTO.firstName" name="firstName" />
+                    Pavarde<input path="submissionDTO.lastName" name="lastName" />
+
+                    <%--Vardas <input type="text" name="firstName">--%>
+                    <%--Pavarde <input type="text" name="lastName">--%>
                     <hr>
                     <table class="table table-striped table-bordered text-left">
                         <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Question</th>
                             <th>Answer</th>
                         </tr>
@@ -64,31 +71,33 @@
                         <tbody>
                         <c:forEach var="element" items="${elements}">
                             <tr>
-                                <td>${element.question.id}</td>
                                 <td>${element.question.questionText}</td>
                                 <td>
                                     <c:if test="${element.question.type=='RADIO'}">
 
                                         <c:forEach var="answer" items="${element.answers}">
-                                            <input type="radio" name="answer" value="${answer}">
-                                            <form:label path="answer">${answer}</form:label>
+                                            <form:radiobutton path="dtos" name="text" value="${answer}"/>${answer}
                                         </c:forEach>
 
                                     </c:if>
                                     <c:if test="${element.question.type=='SELECT'}">
-                                        <select name="item">
-                                            <c:forEach var="answer" items="${element.answers}">
-                                                <option value="1">${answer}</option>
-                                            </c:forEach>
-                                        </select>
+
+                                        <form:select path="dtos" multiple="false">
+                                            <form:options items="${element.answers}"></form:options>
+                                        </form:select>
+
                                     </c:if>
                                     <c:if test="${element.question.type=='CHECK'}">
+
                                         <c:forEach var="answer" items="${element.answers}">
-                                            <input type="checkbox" name="id"> ${answer} <BR>
+                                            <form:checkbox path="dtos" name="text" value="${answer}"/>${answer}
+                                            <br>
                                         </c:forEach>
+
                                     </c:if>
+
                                     <c:if test="${element.question.type=='INPUT'}">
-                                        <input type="text" name="name">
+                                        <form:input path="dtos" name="text"/>
                                     </c:if>
 
                                 </td>
@@ -103,28 +112,61 @@
     </c:when>
 
     <c:when test="${mode == 'MODE_NEW' || MODE_EDIT}">
-        <div class="container text-center">
-            <h3>Create new question</h3>
-            <hr/>
-            <form class="form-horizontal" method="POST" action="save-question">
-                <input type="hidden" name="id" value="${question.id}">
-                <div class="form-group">
-                    <label class="control-label col-md-3">Question</label>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" name="questionText" value="${question.question}"/>
+        <form:form modelAttribute="questionDTO" method="POST" action="/save-question">
+            <div class="container text-center">
+                <h3>Create new question</h3>
+                <hr/>
+
+                <form class="form-horizontal" method="POST" action="save-question">
+
+                    <div class="form-group row">
+                        <form:label path="text" for="example-text-input"
+                                    class="col-2 col-form-label">Enter Question Text</form:label>
+                        <div class="col-10">
+                            <form:input path="text" class="form-control" type="text" id="example-text-input"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3">Question type</label>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" name="type" value="${question.type}"/>
+
+                    <form:label path="type" class="mr-sm-2" for="inlineFormCustomSelect">Question Type</form:label>
+                    <form:select path="type" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+                        <form:options items="${type}"></form:options>
+                    </form:select>
+
+                    <div class="form-group">
+                        <form:label path="dtos" for="possibleAnswer">Possible Answers (max. 5)</form:label>
+                        <form:input path="dtos" type="text" class="form-control" id="possibleAnswer"
+                                    placeholder="Possible Answer"/>
                     </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Save"/>
-                </div>
-            </form>
-        </div>
+
+                    <div class="form-group">
+                        <form:label path="dtos" for="possibleAnswer"></form:label>
+                        <form:input path="dtos" type="text" class="form-control" id="possibleAnswer"
+                                    placeholder="Possible Answer"/>
+                    </div>
+
+                    <div class="form-group">
+                        <form:label path="dtos" for="possibleAnswer"></form:label>
+                        <form:input path="dtos" type="text" class="form-control" id="possibleAnswer"
+                                    placeholder="Possible Answer"/>
+                    </div>
+
+                    <div class="form-group">
+                        <form:label path="dtos" for="possibleAnswer"></form:label>
+                        <form:input path="dtos" type="text" class="form-control" id="possibleAnswer"
+                                    placeholder="Possible Answer"/>
+                    </div>
+
+                    <div class="form-group">
+                        <form:label path="dtos" for="possibleAnswer"></form:label>
+                        <form:input path="dtos" type="text" class="form-control" id="possibleAnswer"
+                                    placeholder="Possible Answer"/>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Save New Question"/>
+                </form>
+            </div>
+        </form:form>
+
     </c:when>
 </c:choose>
 

@@ -22,7 +22,11 @@ public class QuestionValueService {
     public void createQuestionValue(List<String> answerValues, Integer questionID) {
         for (String answerValue : answerValues) {
             QuestionValue questionValue = new QuestionValue(answerValue, questionID);
-            questionValueRepository.save(questionValue);
+            if (!questionValue.isTextNull()) {
+                questionValueRepository.save(questionValue);
+            } else {
+                System.out.println("Text was null");
+            }
         }
     }
 

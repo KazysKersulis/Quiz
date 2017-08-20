@@ -9,6 +9,7 @@ import java.util.List;
 public class Question {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "QUESTION")
@@ -39,15 +40,31 @@ public class Question {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getQuestionText() {
         return questionText;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
     public AnswerType getType() {
         return type;
     }
 
+    public void setType(AnswerType type) {
+        this.type = type;
+    }
+
     public List<QuestionValue> getQuestionValues() {
         return questionValues;
+    }
+
+    public void setQuestionValues(List<QuestionValue> questionValues) {
+        this.questionValues = questionValues;
     }
 }

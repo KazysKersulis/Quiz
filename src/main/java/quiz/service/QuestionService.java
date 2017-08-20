@@ -3,6 +3,7 @@ package quiz.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import quiz.controller.dto.QuestionDTO;
 import quiz.controller.dto.QuizElementDTO;
 import quiz.model.AnswerType;
 import quiz.model.Question;
@@ -34,10 +35,10 @@ public class QuestionService implements Serializable{
     }
 
     @Transactional
-    public void createQuestion(String questionText, AnswerType questionType, List<String> answerValues) {
-        Question question = new Question(questionText, questionType);
-        questionRepository.saveAndFlush(question);
-        questionValueService.createQuestionValue(answerValues, question.getId());
+    public void createQuestion(QuestionDTO questionDTO, List<String> answerValues) {
+        Question newQuestion = new Question(questionDTO.getText(), questionDTO.getType());
+        questionRepository.saveAndFlush(newQuestion);
+        questionValueService.createQuestionValue(answerValues, newQuestion.getId());
     }
 
     public void delete(int id) {

@@ -24,8 +24,16 @@ public class QuestionDTO {
         return text;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public AnswerType getType() {
         return type;
+    }
+
+    public void setType(AnswerType type) {
+        this.type = type;
     }
 
     public List<QuestionValueDTO> getDtos() {
