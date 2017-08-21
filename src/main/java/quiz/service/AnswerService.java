@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import quiz.controller.dto.AnswerValueDTO;
 import quiz.model.Answer;
+import quiz.model.Question;
 import quiz.repository.AnswerRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,4 +30,14 @@ public class AnswerService {
             answerRepository.save(newAnswer);
         }
     }
+
+    @Transactional(readOnly = true)
+    public List<Answer> getAllAnswers() {
+        List<Answer> answers = new ArrayList<Answer>();
+        for (Answer answer : answerRepository.findAll()){
+            answers.add(answer);
+        }
+        return answers;
+    }
+
 }

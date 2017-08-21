@@ -25,7 +25,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="new-question">Add new Question</a></li>
-                <li><a href="quiz">All questions</a></li>
+                <li><a href="quiz">Quiz</a></li>
             </ul>
         </div>
     </div>
