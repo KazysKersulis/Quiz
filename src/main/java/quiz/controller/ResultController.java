@@ -40,6 +40,8 @@ public class ResultController {
                     submission.getLastName(), submissionTexts));
         }
 
+        model.addAttribute("resultDTO", resultElementDTOS);
+        model.addAttribute("mode", "MODE_RESULTS");
 
         return "index";
     }

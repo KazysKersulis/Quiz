@@ -24,8 +24,9 @@
         <a href="/" class="navbar-brand">Quiz</a>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="new-question">Add new Question</a></li>
                 <li><a href="quiz">Quiz</a></li>
+                <li><a href="result">Results</a></li>
+                <li><a href="new-question">Add new Question</a></li>
             </ul>
         </div>
     </div>
@@ -35,7 +36,7 @@
     <c:when test="${mode == 'MODE_HOME'}">
         <div class="container invisible-at-first" id="homeDiv">
             <div class="jumbotron text-center">
-                <h1>Questions List</h1>
+                <h1>Welcome to VCS0630 Java Quiz!</h1>
             </div>
         </div>
     </c:when>
@@ -167,6 +168,48 @@
             </div>
         </form:form>
 
+    </c:when>
+
+    <c:when test="${mode == 'MODE_RESULTS'}">
+        <div class="container text-center" id="questionsDiv">
+
+            <h3>Results</h3>
+
+            <table class="table table-striped table-bordered text-left">
+                <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Answers</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="result" items="${resultDTO}">
+                    <tr>
+                        <td>${result.firstName}</td>
+                        <td>${result.lastName}</td>
+                        <td>
+                            <c:forEach var="answer" items="${result.answers}">
+                                <%--<form:checkbox path="dtos" name="text" value="${answer}"/>${answer}--%>
+                                ${answer}
+                                <br>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+        </div>
     </c:when>
 </c:choose>
 
