@@ -1,2 +1,2 @@
 # Quiz
-Simple quiz Spring Boot project
+Spring Boot quiz application with MySQL
